@@ -22,10 +22,8 @@ stdenv.mkDerivation rec {
     cp target/visual-dfa-${version}-jar-with-dependencies.jar $out/bin/visual-dfa.jar
     shopt -s extglob
 	cp target/classes/dfa/analyses/!(*Dummy*)*.class $out/bin/dfa/analyses
-    cat > $out/bin/visual-dfa << EOL
-    #! ${stdenv.shell}
-    java -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -jar $out/bin/visual-dfa.jar
-    EOL
+    echo "#! ${stdenv.shell}" >> $out/bin/visual-dfa
+    echo "java -Dswing.defaultlaf=javax.swing.plaf.metal.MetalLookAndFeel -jar $out/bin/visual-dfa.jar" >> $out/bin/visual-dfa
     chmod +x $out/bin/visual-dfa
     wrapProgram $out/bin/visual-dfa --prefix PATH ":" ${jdk}/bin ;
   '';
