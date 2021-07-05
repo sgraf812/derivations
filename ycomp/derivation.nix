@@ -1,4 +1,4 @@
-{ stdenv, fetchzip, makeWrapper, jre }:
+{ stdenv, fetchzip, makeWrapper, jre8 }:
 
 stdenv.mkDerivation rec {
   name    = "ycomp-${version}";
@@ -17,6 +17,6 @@ stdenv.mkDerivation rec {
     mkdir -p $out/bin
     cp ${src}/* $out/bin/
     chmod +x $out/bin/ycomp
-    wrapProgram $out/bin/ycomp --prefix PATH ":" ${jre}/bin ;
+    wrapProgram $out/bin/ycomp --prefix PATH ":" ${jre8}/bin ;
   '';
 }
